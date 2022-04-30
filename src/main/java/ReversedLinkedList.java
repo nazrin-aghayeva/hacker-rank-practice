@@ -2,39 +2,38 @@ import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 
 public class ReversedLinkedList {
-    static Node head;
 
     @AllArgsConstructor
-    static class Node{
-        Integer data;
+    public static class Node{
+        Integer value;
         Node next;
 
         Node(Integer d){
-            data= d;
+            value = d;
             next=null;
         }
     }
 
-    Node reverse(Node node){
-        Node prev = null;
+    private Node reverse(Node node){
+        Node previous = null;
         Node current = node;
         Node next;
 
         while(ObjectUtils.isNotEmpty(current)){
             next = current.next;
-            current.next = prev;
-            prev = current;
+            current.next = previous;
+            previous = current;
             current= next;
         }
-        node= prev;
+        node= previous;
         return node;
     }
 
     public static void main(String[] args) {
         ReversedLinkedList list = new ReversedLinkedList();
-        head = new Node(86);
+        Node head = new Node(86);
         head.next = new Node(12);
         head.next.next= new Node(5);
-        list.reverse(head);
+        System.out.println(list.reverse(head).next.value);
     }
 }
